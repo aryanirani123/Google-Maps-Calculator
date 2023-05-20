@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function calculateDistanceAndTime() {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+
+        google.script.run.withSuccessHandler(updateResult).calculateDistances(start, end);
+      }
+
+      function updateResult(result) {
+        document.getElementById('distance').textContent = result.distance;
+        document.getElementById('duration').textContent = result.duration;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Distance and Time Calculator</h1>
+    <form onsubmit="event.preventDefault(); calculateDistanceAndTime();">
+      <label for="start">Start Location:</label>
+      <input type="text" id="start" required><br>
+      <label for="end">End Location:</label>
+      <input type="text" id="end" required><br>
+      <input type="submit" value="Calculate">
+    </form>
+
+    <h2>Result</h2>
+    <p>Distance: <span id="distance"></span></p>
+    <p>Duration: <span id="duration"></span></p>
+  </body>
+</html>
